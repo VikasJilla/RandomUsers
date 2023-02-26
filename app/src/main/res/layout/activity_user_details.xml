@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="headerColor"
+            type="android.graphics.drawable.ColorDrawable" />
+        <variable
+            name="iconColor"
+            type="Integer" />
+        <variable
+            name="user"
+            type="com.example.randomusers.data.entities.UserEntity" />
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@{headerColor}">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:padding="@dimen/margin"
+                android:layout_marginTop="@dimen/margin_large"
+                >
+                <ImageView
+                    android:id="@+id/profile_pic"
+                    android:layout_width="@dimen/image_size_large"
+                    android:layout_height="@dimen/image_size_large"
+                    android:contentDescription="@string/user_photo"
+                    android:layout_marginBottom="@dimen/margin"/>
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/list_title_size"
+                    android:visibility="@{user.displayName().blank?View.GONE:View.VISIBLE}"
+                    android:text="@{user.displayName()}"
+                    android:layout_marginBottom="@dimen/margin"/>
+                <TextView
+                    android:id="@+id/userLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="@dimen/list_item_subtitle_size"
+                    android:textColor="@color/black"
+                    android:visibility="@{user.location == null?View.INVISIBLE:View.VISIBLE}"
+                    android:text="@{user.location}"/>
+            </LinearLayout>
+
+            <ImageButton
+                android:layout_width="@dimen/image_size"
+                android:layout_height="@dimen/image_size"
+                android:src="@drawable/baseline_arrow_back_24"
+                android:background="@color/transparent"
+                android:contentDescription="@string/back_desc"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                app:tint="@color/white"
+                android:onClick="@{(v)->clickListener.onClick(v)}"
+                />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:padding="@dimen/margin"
+            android:gravity="center_vertical">
+            <ImageView
+                android:src="@drawable/baseline_email_24"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:layout_marginEnd="@dimen/margin_large"
+                app:tint="@{iconColor}" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/list_title_size"
+                android:textColor="@color/black"
+                android:text="@{user.email}"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/black"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:padding="@dimen/margin"
+            android:gravity="center_vertical">
+            <ImageView
+                android:src="@drawable/baseline_local_phone_24"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:layout_marginEnd="@dimen/margin_large"
+                app:tint="@{iconColor}" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/list_title_size"
+                android:textColor="@color/black"
+                android:text="@{user.cell}"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/black"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:padding="@dimen/margin"
+            android:gravity="center_vertical">
+            <ImageView
+                android:src="@drawable/baseline_calendar_today_24"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:layout_marginEnd="@dimen/margin_large"
+                app:tint="@{iconColor}" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/list_title_size"
+                android:textColor="@color/black"
+                android:text="@{user.getDOB()}"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/black"
+            />
+    </LinearLayout>
+
+</layout>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="user"
+            type="com.example.randomusers.data.entities.UserEntity" />
+        <variable
+            name="emptyText"
+            type="String"
+            android:value=""/>
+        <variable
+            name="itemClickListener"
+            type="com.example.randomusers.presentation.clicklisteners.CustomClickListener"/>
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/margin"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:clickable="true"
+            android:onClick="@{()->itemClickListener.itemClicked(user)}"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:focusable="true"
+            android:padding="@dimen/margin_large">
+            <ProgressBar
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:id="@+id/progress_circular"
+                android:visibility="@{user == null?View.VISIBLE:View.GONE}"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:minHeight="40dp"
+                android:minWidth="40dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <ImageView
+                android:id="@+id/profile_view"
+                android:visibility="@{user == null?View.INVISIBLE:View.VISIBLE}"
+                android:layout_width="@dimen/image_size"
+                android:layout_height="@dimen/image_size"
+                android:contentDescription="@string/user_photo"
+                android:layout_marginBottom="@dimen/margin"
+                />
+            <TextView
+                android:id="@+id/userName"
+                android:visibility="@{user == null || user.displayName().isBlank()?View.INVISIBLE:View.VISIBLE}"
+                android:text="@{user == null?emptyText:user.displayName()}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/list_title_size"
+                android:layout_marginBottom="@dimen/margin"/>
+            <TextView
+                android:id="@+id/userLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/list_item_subtitle_size"
+                android:visibility="@{user == null ||user.location == null?View.INVISIBLE:View.VISIBLE}"
+                android:text="@{user == null?emptyText:user.location}"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+<!--    <LinearLayout-->
+<!--        android:clickable="true"-->
+<!--        android:onClick="@{()->itemClickListener.itemClicked(user)}"-->
+<!--        android:orientation="vertical"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="?android:attr/selectableItemBackground"-->
+<!--        android:focusable="true">-->
+<!--        <ProgressBar-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_weight="1"-->
+<!--            android:id="@+id/progress_circular"-->
+<!--            android:visibility="@{user == null?View.VISIBLE:View.GONE}"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:minHeight="40dp"-->
+<!--            android:minWidth="40dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            />-->
+<!--        <LinearLayout-->
+<!--            android:orientation="horizontal"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:padding="@dimen/margin"-->
+<!--            android:layout_height="wrap_content">-->
+<!--            <ImageView-->
+<!--                android:id="@+id/profile_view"-->
+<!--                android:visibility="@{user == null?View.INVISIBLE:View.VISIBLE}"-->
+<!--                android:layout_width="@dimen/image_size"-->
+<!--                android:layout_height="@dimen/image_size"-->
+<!--                android:contentDescription="@string/user_photo"-->
+<!--                android:layout_marginEnd="@dimen/dp12"-->
+<!--                />-->
+<!--            <LinearLayout-->
+<!--                android:orientation="vertical"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+<!--                <TextView-->
+<!--                    android:id="@+id/userName"-->
+<!--                    android:visibility="@{user == null || user.displayName().isBlank()?View.INVISIBLE:View.VISIBLE}"-->
+<!--                    android:text="@{user == null?emptyText:user.displayName()}"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textSize="@dimen/list_title_size"-->
+<!--                    android:layout_marginBottom="@dimen/margin"/>-->
+<!--                <TextView-->
+<!--                    android:id="@+id/userLocation"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textSize="@dimen/list_item_subtitle_size"-->
+<!--                    android:visibility="@{user == null ||user.location == null?View.INVISIBLE:View.VISIBLE}"-->
+<!--                    android:text="@{user == null?emptyText:user.location}"/>-->
+<!--            </LinearLayout>-->
+
+<!--        </LinearLayout>-->
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0.5dp"-->
+<!--            android:background="#000000"/>-->
+<!--    </LinearLayout>-->
+</layout>
